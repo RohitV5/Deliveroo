@@ -1,5 +1,5 @@
 <h1 align="center"> DELIVEROO 3.0  </h1>
-![1657634519411](https://user-images.githubusercontent.com/23634935/178509000-1bf98e80-59bf-43ae-978f-0faabc511923.PNG)
+![Deliveroo](https://user-images.githubusercontent.com/23634935/178509000-1bf98e80-59bf-43ae-978f-0faabc511923.png)
 
 npm i expo-cli
 npx create-expo-app .
