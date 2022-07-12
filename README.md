@@ -1,10 +1,8 @@
 <h1 align="center"> DELIVEROO 3.0  </h1>
 
-![reddit](https://user-images.githubusercontent.com/23634935/175880848-2b631d6f-d116-4858-a767-19215b435a69.png)
-
-<h1 align="center"> NextJS | React | SQL | Supabase | StepZen | GraphQL | Typescript | Tailwind | React hook form  </h1>
-
 ![deliveroo](https://user-images.githubusercontent.com/23634935/178509000-1bf98e80-59bf-43ae-978f-0faabc511923.png)
+
+<h1 align="center"> React Native | Sanity CMS | Tailwind | </h1>
 
 npm i expo-cli
 npx create-expo-app .
