@@ -1,6 +1,6 @@
 <h1 align="center"> DELIVEROO 3.0  </h1>
 
-![deliveroo](https://user-images.githubusercontent.com/23634935/178509000-1bf98e80-59bf-43ae-978f-0faabc511923.png)
+![deliveroo](https://user-images.githubusercontent.com/23634935/178509000-1bf98e80-59bf-43ae-978f-0faabc511923.PNG)
 
 <h1 align="center"> React Native | Sanity CMS | Tailwind | </h1>
 
