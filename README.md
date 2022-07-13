@@ -7,5 +7,7 @@ scan the barcode in expo go
 In react native everything is flex and flex-col by default
 
 
-https://www.youtube.com/watch?v=taPz40VmyzQ&t=568s&ab_channel=SonnySangha 1:01:00
+https://www.youtube.com/watch?v=taPz40VmyzQ&t=568s&ab_channel=SonnySangha 1:57:00
+
+For environemnt variable: https://www.npmjs.com/package/babel-plugin-transform-inline-environment-variables
 
