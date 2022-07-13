@@ -1,5 +1,5 @@
 import { View, Text, TextInput, Image, ScrollView } from "react-native";
-import React, { useLayoutEffect } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
@@ -10,9 +10,12 @@ import {
 } from "react-native-heroicons/outline";
 import Categories from "../components/Categories";
 import FeaturedRow from "../components/FeaturedRow";
+import sanityClient from "../sanity";
 
 export default function HomeScreen() {
   const navigation = useNavigation();
+
+  const [featuredCategories, setFeaturedCategories] = useState([]);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -20,6 +23,26 @@ export default function HomeScreen() {
     });
   }, []);
 
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `
+    *[_type == "featured"]{
+      ...,
+      restaurants[]->{
+        ...,
+        dishes[]->
+
+      }
+    }
+    `
+      )
+      .then((data) => {
+        setFeaturedCategories(data);
+      });
+  }, []);
+
+  console.log("Homescreen", featuredCategories);
   return (
     <SafeAreaView className="pt-5 bg-white">
       {/* Header */}
@@ -30,8 +53,8 @@ export default function HomeScreen() {
         />
         <View className="flex-1">
           <Text className="text-xs font-bold text-gray-400">Deliver now!</Text>
-          <Text className="text-xl font-bold">
-            Current location!
+          <Text className="text-xl font-bold align-middle">
+            Current location
             <ChevronDownIcon size={20} color="#00CCBB" />
           </Text>
         </View>
@@ -43,29 +66,30 @@ export default function HomeScreen() {
       <View className="flex-row items-center pb-2 mx-4 space-x-2 ">
         <View className="flex-row flex-1 p-2 space-x-2 bg-gray-200">
           <SearchIcon color="gray" size={20} />
-          <TextInput placeholder="Restaurants and cuisines"  keyboardType="default"/>
+          <TextInput
+            placeholder="Restaurants and cuisines"
+            keyboardType="default"
+          />
         </View>
         <AdjustmentsIcon color="#00CCBB" />
       </View>
 
       {/* Body Scrollable Area */}
-      <ScrollView className="flex-1 bg-gray-100" >
+      <ScrollView className="flex-1 bg-gray-100" contentContainerStyle={{ paddingBottom: 120 }}
+
+>
         {/* Categories */}
-        <Categories/>
+        <Categories />
 
         {/* Featured Rows */}
-
-        <FeaturedRow id="12345667" title="Featured" description="Paid placements from our partners" featuredCategory="featured" />
-
-        {/* Tasty discounts */}
-
-        <FeaturedRow id="12345" title="Tasty Discounts" description="Everyone has been enjoying these tasty discounts" featuredCategory="discounts" />
-
-        {/* Featured Rows */}
-
-        <FeaturedRow id="1234" title="Offer near you" description="Why not support your local restaurants tonight" featuredCategory="offers" />
-
-
+        {featuredCategories.map((featuredCategory) => (
+          <FeaturedRow
+          key={featuredCategory?._id}
+            id={featuredCategory?._id}
+            title={featuredCategory?.name}
+            description={featuredCategory?.short_description}
+          />
+        ))}
       </ScrollView>
     </SafeAreaView>
   );
