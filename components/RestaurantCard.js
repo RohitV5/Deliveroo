@@ -5,6 +5,7 @@ import { Image } from "react-native";
 import { StarIcon } from "react-native-heroicons/solid";
 import { LocationMarkerIcon } from "react-native-heroicons/outline";
 import { urlFor } from "../sanity";
+import { useNavigation } from "@react-navigation/native";
 
 const RestaurantCard = ({
   id,
@@ -18,9 +19,30 @@ const RestaurantCard = ({
   long,
   lat,
 }) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity className="mr-3 bg-white shadow">
-      <Image source={{ uri: urlFor(imgUrl).url() }} className="rounded-sm h-36" />
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Restaurant", {
+          id,
+          imgUrl,
+          title,
+          rating,
+          genre,
+          address,
+          short_description,
+          dishes,
+          long,
+          lat,
+        });
+      }}
+      className="mr-3 bg-white shadow"
+    >
+      <Image
+        source={{ uri: urlFor(imgUrl).url() }}
+        className="rounded-sm h-36"
+      />
       <View className="px-3 pb-4">
         <Text className="pt-2 text-lg font-bold ">{title}</Text>
         <View className="flex-row items-center space-x-1">
@@ -30,9 +52,11 @@ const RestaurantCard = ({
           </Text>
         </View>
 
-        <View className="flex-row items-center space-x-1 w-64">
+        <View className="flex-row items-center w-64 space-x-1">
           <LocationMarkerIcon color="gray" opacity={0.4} size={22} />
-          <Text className="text-xs text-gray-500 text-overflow-ellipsis">Nearby. {address}</Text>
+          <Text className="text-xs text-gray-500 text-overflow-ellipsis">
+            Nearby. {address}
+          </Text>
         </View>
       </View>
     </TouchableOpacity>
